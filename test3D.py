@@ -1,5 +1,6 @@
 """
-Intersection example
+Marco Aldair De Jesus Caceres
+18390579
 """
 import matplotlib.pyplot as plt 
 import numpy as np
@@ -17,6 +18,7 @@ yc=40
 zc=40
 
 #Plano y linea de sistema
+#coordenadas tomadas de la presentacion, la z no supe que valor poner pero le puse las mismas que los ejempos
 x=[40,30,80]
 y=[60,10,60]
 z=[-10,10,10]
@@ -28,7 +30,9 @@ def llenarglobales():
         zg.append(z[i]+zc)
 
 #____Plotear el sistema 
-#def plotPlaneLine(xg,yg,zg,xh,yh,xhg,yhg,hitcolor):
+"""
+En esta funcion se imprime el triangulo y calcula si se sale del plano el hit point
+"""
 def plotPlaneLine(xg,yg,zg,A,A1,A2):
     plt.axis([0,300,150,0])
     plt.axis('on')
@@ -40,19 +44,17 @@ def plotPlaneLine(xg,yg,zg,A,A1,A2):
     plt.plot([xg[1],xg[3]],[yg[1],yg[3]],color='k',linestyle='dashed')
     plt.plot([xg[2],xg[3]],[yg[2],yg[3]],color='k',linestyle='dashed')
     plt.scatter(xg[3],yg[3],color='r')
-
+#Tuve problemas para las etiquetas ya que me las coloca ensima de las otras
     plt.text(20,75,int(A))
     plt.text(30,75,int(A1))
     plt.text(40,75,int(A2))
-    #plt.text(30,100,A1)
-    #plt.text(40,100,A2)
     if (A1+ A2) > A:
         plt.text(50,100,'Fuera')
     if (A1+ A2) < A:
         plt.text(50,100,'Dentro')
 
     plt.show()
-
+#intente calcular las areas pero tuve problemas ya que no supe muy bien cual eran los puntos a,b,c asi que lo calcule como el ejemplo que mando
 def hitpoint(x,y,z):
     #_____distance point 0 to 1
     a=x[0]-x[1]
@@ -100,7 +102,7 @@ def hitpoint(x,y,z):
     A2 = sqrt(s*(s-a)*(s-b)*(s-c))
     return A,A1,A2
 
-
+#utiliza un while para preguntar el hitpoint, y mi numero de control para que se salga 
 while True:
     axis=input("Ingrese s para ingresar las coordenadas o el num control para salir ?:")
     if axis == '18390579':
@@ -112,5 +114,6 @@ while True:
         y.append(hy)
         z.append(-10)
         llenarglobales()
+        #regreso los valores de las areas para el verificar si se sale o no
         A,A1,A2 = hitpoint(x,y,z)
         plotPlaneLine(xg,yg,zg,A,A1,A2)
